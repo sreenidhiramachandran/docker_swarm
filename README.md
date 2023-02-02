@@ -1,5 +1,6 @@
 # docker_swarm
 
+![image](https://user-images.githubusercontent.com/120683482/216436604-81ba1697-a144-42dc-a855-60ad1fa3ede3.png)
 
 Docker Swarm is a clustering and scheduling tool for Docker containers. 
 
