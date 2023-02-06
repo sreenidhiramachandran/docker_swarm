@@ -2,7 +2,10 @@
 
 ![image](https://user-images.githubusercontent.com/120683482/216436604-81ba1697-a144-42dc-a855-60ad1fa3ede3.png)
 
+Docker is a tool used to automate the deployment of an application as a lightweight container so that the application can work efficiently in different environments.
+
 Docker Swarm is a clustering and scheduling tool for Docker containers. 
+Clustering is an important feature for container technology, because it creates a cooperative group of systems that can provide redundancy, enabling Docker Swarm failover if one or more nodes experience an outage. A Docker Swarm cluster also provides administrators and developers with the ability to add or subtract container iterations as computing demands change.
 
 We create an overlay network for our services. 
 
