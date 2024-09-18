@@ -24,7 +24,7 @@ Here, we create an overlay network for our services.
 
 ![image](https://user-images.githubusercontent.com/120683482/216434371-8f00ad94-aca2-4ade-a128-4ed49716c0c6.png)
 
-#### Install docker and use the token to join the cluster 
+#### On the worker nodes, install docker and use the token obtained from the master node to join the cluster 
 ```
 #!/bin/bash
 
@@ -36,7 +36,7 @@ sudo hostnamectl set-hostname worker2-ap-south-1.compute.internal
 docker swarm join --token SWMTKN-1-2pcnaznflz6ej4n4o4bnsr49uasiez8rnxb903lzdwayf9j04e-a59vzthozqxzocmxn9iwvod04 172.31.47.219:2377
 ```
 
-After configuring the workers
+After configuring the worker nodes, run the below commands from the master node to see the worker nodes added to the cluster
 ```
 $ docker node ls
 ```
@@ -51,17 +51,15 @@ Add labels,
 ```
 [ec2-user@manager ~]$ docker node update --label-add service=api-service worker1-ap-south-1.compute.internal
 ```
+![image](https://user-images.githubusercontent.com/120683482/216431118-13cffc5d-7f7a-4a28-86d4-ef3b658f6673.png)
+
+
 To check if the labels are added correctly,
 ```
 [ec2-user@manager ~]$ docker node inspect worker1-ap-south-1.compute.internal
 ```
 
-![image](https://user-images.githubusercontent.com/120683482/216431118-13cffc5d-7f7a-4a28-86d4-ef3b658f6673.png)
-
-![image](https://user-images.githubusercontent.com/120683482/216431417-51179ae8-f389-4a1c-8391-3070bfff9f36.png)
-
-
-
+redis cache
 
 ![image](https://user-images.githubusercontent.com/120683482/216431584-e444ecd2-624f-4179-ad69-576aeb64d5c0.png)
 
