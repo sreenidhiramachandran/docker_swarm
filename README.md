@@ -1,24 +1,31 @@
 # docker_swarm
 
-![image](https://user-images.githubusercontent.com/120683482/216436604-81ba1697-a144-42dc-a855-60ad1fa3ede3.png)
 
 Docker is a tool used to automate the deployment of an application as a lightweight container so that the application can work efficiently in different environments.
 
 Docker Swarm is a clustering and scheduling tool for Docker containers. 
 Clustering is an important feature for container technology, because it creates a cooperative group of systems that can provide redundancy, enabling Docker Swarm failover if one or more nodes experience an outage. A Docker Swarm cluster also provides administrators and developers with the ability to add or subtract container iterations as computing demands change.
 
-We create an overlay network for our services. 
+Here, we create an overlay network for our services. 
 
+#### We are using one master and three worker nodes in this case.  
 
+![image](https://user-images.githubusercontent.com/120683482/216436604-81ba1697-a144-42dc-a855-60ad1fa3ede3.png)
+
+#### Initializing docker swarm
+```
 [ec2-user@manager ~]$ docker swarm init
-
+```
 ![image](https://user-images.githubusercontent.com/120683482/216430526-74929358-a540-4795-852d-25ea7fb3bf6b.png)
 
 
-Custom bridge
+#### Creating a custom bridge
+
+
 ![image](https://user-images.githubusercontent.com/120683482/216434371-8f00ad94-aca2-4ade-a128-4ed49716c0c6.png)
 
-
+#### Install docker and use the token to join the cluster 
+```
 #!/bin/bash
 
 sudo yum install docker -y
@@ -27,22 +34,27 @@ sudo systemctl enable docker.service
 sudo usermod -a -G docker ec2-user
 sudo hostnamectl set-hostname worker2-ap-south-1.compute.internal
 docker swarm join --token SWMTKN-1-2pcnaznflz6ej4n4o4bnsr49uasiez8rnxb903lzdwayf9j04e-a59vzthozqxzocmxn9iwvod04 172.31.47.219:2377
+```
 
 After configuring the workers
-
+```
 $ docker node ls
-
+```
 
 ![image](https://user-images.githubusercontent.com/120683482/216430620-a681e073-4c11-4aa4-baf3-4ef8dcc6f4fb.png)
 
-
+```
 [ec2-user@manager ~]$ docker node update --availability drain manager.ap-south-1.compute.internal
+```
 
-Add labels
-
+Add labels,
+```
 [ec2-user@manager ~]$ docker node update --label-add service=api-service worker1-ap-south-1.compute.internal
+```
+To check if the labels are added correctly,
+```
 [ec2-user@manager ~]$ docker node inspect worker1-ap-south-1.compute.internal
-to verify label
+```
 
 ![image](https://user-images.githubusercontent.com/120683482/216431118-13cffc5d-7f7a-4a28-86d4-ef3b658f6673.png)
 
